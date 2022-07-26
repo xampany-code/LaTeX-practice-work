@@ -1,0 +1,421 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{csquotes}
+\usepackage{scrextend}
+\usepackage[inline]{enumitem}
+\usepackage{xcolor}
+
+\title{LaTeX practice work: "Fundamentals of Differential Equations"\thanks {Nagle Saff Snide} }
+\author{Anna Gertsog DSBA 204 group}
+\date{20 July 2022}
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Abstract}
+This work includes a brief summary of the most important and interesting topics in Nagle Saff Snide's textbook "Fundamentals of Differential Equations", including significant formulas and illustrative pictures for mastering the material. This notebook was done by a \begin{math}3^d\end{math} year student during a summer internship to improve his knowledge of \LaTeX, as well as to review a course on differential equations. I hope it will be helpful to someone.
+
+\section{Introduction}
+In the sciences and engineering, mathematical models are developed to aid in the understanding of physical phenomena. These models often yield an equation that contains some derivatives of an unknown function. Such an equation is called a \textbf{differential equation}.
+Two examples of models developed in calculus are the free fall of a body and the decay of a radioactive substance.\\
+\indent\setlength{\parindent}{1em} In the case of free fall, an object is released from a certain height above the ground and falls under the force of gravity \footnote {We are assuming here that gravity is the only force acting on the object and that this force is constant. More general models would take into account other forces, such as air resistance.}. Newton’s second law, which states that an object’s mass times its acceleration equals the total force acting on it, can be applied to the falling object. This leads to the equation (see Figure 1.1)\\ 
+\begin{equation}
+    m\frac{d^2h}{dt^2} = -mg,
+\end{equation}
+where m is the mass of the object, h is the height above the ground, \begin{math} d^2h/dt^2 \end{math} is its acceleration, \textsl{g} is the (constant) gravitational acceleration, and $-$mg is the force due to gravity. This is a differential equation containing the second derivative of the unknown height h as a function of time.
+\\
+\indent\setlength{\parindent}{1em} Fortunately, the above equation is easy to solve for \textsl{h}. All we have to do is divide by m and integrate twice with respect to \textsl{t}. That is,
+\begin{equation}
+\frac{d^2h}{dt^2} = -g,
+\end{equation}
+so
+\begin{equation}
+\frac{dh}{dt} = -gt +c_1
+\end{equation}
+and
+\begin{equation}
+h = h(t) = \frac{-gt^2}{2} +c_1t +c_2 .
+\end{equation}
+\\
+\begin{center}
+\includegraphics[width=.5\linewidth]{images/apple tree.png}
+\end{center}
+\begin{center}
+\textbf{Figure 1.1} Apple in free fall
+\end{center}
+
+We will see that the constants of integration, c1 and c2, are determined if we know the initial height and the initial velocity of the object. We then have a formula for the height of the object at time t.
+In the case of radioactive decay (Figure 1.2), we begin from the premise that the rate of decay is proportional to the amount of radioactive substance present. This leads to the equation
+\begin{equation}
+    \frac{dA}{dt} = -kA, k>0
+\end{equation}
+where A>0 is the unknown amount of radioactive substance present at time t and k is the proportionality constant. To solve this differential equation, we rewrite it in the form
+\begin{equation}
+    \frac{1}{A}dA = -k dt
+\end{equation}
+and integrate to obtain
+\begin{equation}
+\int\frac{1}{A}dA = \int -k dt
+\end{equation}
+\begin{equation}
+ln A + C_1 = -kt +C_2
+\end{equation}
+
+Solving for A yields
+
+\begin{equation}
+    A = A(t) = e^{lnA} = e^{-kt}e^{C_2-C_1} = Ce^{-kt}
+\end{equation}
+
+where C is the combination of integration constants \begin{equation*}
+e^{C_2-C_1} \end{equation*}. The value of C, as we will see later, is determined if the initial amount of radioactive substance is given. We then have a formula for the amount of radioactive substance at any future time t.
+Even though the above examples were easily solved by methods learned in calculus, they do give us some insight into the study of differential equations in general. First, notice that the solution of a differential equation is a function, like \textsl{h(t)} or \textsl{A(t)}, not merely a number. Second, integration is an important tool in solving differential equations (not surprisingly!). Third, we cannot expect to get a unique solution to a differential equation, since there will be arbitrary “constants of integration.” The second derivative \begin{math}  d^2h/dt^2 \end{math}  in the free-fall equation gave rise to two constants, \begin{math} c_1 \end{math} and \begin{math} c_2 \end{math}, and the first derivative in the decay equation gave rise, ultimately, to one constant, C.
+
+Whenever a mathematical model involves the \textbf{rate of change} of one variable with respect to another, a differential equation is apt to appear. Unfortunately, in contrast to the examples for free fall and radioactive decay, the differential equation may be very complicated and difficult to analyze.
+
+Differential equations arise in a variety of subject areas, including not only the physical sciences but also such diverse fields as economics, medicine, psychology, and operations research.
+
+\begin{center}
+    
+\includegraphics[width=.5\linewidth]{images/decay.png}
+\end{center}
+\begin{center}
+\textbf{Figure 1.2} Radioactive decay
+\end{center}
+
+
+\section{Basic theory of linear differential equations}
+
+A linear differential equation of order n is an equation that can be written in the form
+\begin{equation}
+    a_n(x)y^{(n)}(x)+a_{n-1}(x)y^{(n-1}(x) + ... + a_0(x)y(x) = b(x) ,
+\end{equation}
+
+where \begin{math} a_0(x),a_1(x),...,a_1(x),...,a_n(x) \end{math} and \begin{math} b \end{math} depend only on \textsl{x}, not \textsl{y}. When \begin{math} a_0,a_1,...a_n \end{math} are all constants, we say equation (1) has \textbf{constant coefficients;} otherwise it \textbf{has variable coefficients.} If\begin{equation*}
+    b(x) \equiv 0,
+\end{equation*}
+is called \textbf{homogeneous;} otherwise it is \textbf{nonhomogeneous}.\\
+\indent\setlength{\parindent}{1em} In developing a basic theory, we assume that \begin{math} a_0(x),a_1(x),...,a_1(x),...,a_n(x) \end{math} and \textsl{b(x)} are all continuous on an interval \textsl{I} and \begin{math} a_n(x) \neq 0 \end{math} on \textsl{I.} Then, on dividing by \begin{math} a_n(x) \end{math} we can rewrite (1) in the \textbf{standard form}
+\begin{equation}
+    y^{(n)}(x) + p_1(x)y^{(n-1)}(x) + ... + p_n(x)y(x) = g(x) ,
+\end{equation}
+
+where the functions \begin{math} p_1(x),...,p_n(x) \end{math} and  \textsl{g(x)} are continuous on \textsl{I}.\\
+\indent\setlength{\parindent}{1em}For a linear higher-order differential equation, the initial value problem always has a unique solution.
+
+\begin{displayquote}
+     \textsl{Science is a differential equation. Religion is a boundary condition. ©  Alan Mathison Turing}
+\end{displayquote}
+
+\subsection{Exercises}
+\textsl{In Problems 1-3, determine the largest interval (a, b) for which Theorem 1 guarantees the existence of a unique solution on (a, b) to the given initial value problem.}
+\begin{enumerate}
+\item \begin{equation*}
+    xy^{\prime\prime\prime} - 3y^{\prime} + e^xy = x^2 - 1;
+    \end{equation*}\\
+    \begin{equation*}
+    y(-2) = 1, y^{\prime}(-2) = 0, y^{\prime\prime}(-2) = 2
+\end{equation*}
+\item\begin{equation*}
+    y^{\prime\prime\prime} - y^{\prime\prime} + \sqrt{x-1}y = tan x;
+\end{equation*}\\
+\begin{equation*}
+    y(5) = y^{\prime}(5) = y^{\prime\prime}(5) = 1
+\end{equation*}
+\item \begin{equation*}
+    x\sqrt{x+1}y^{\prime\prime\prime} - y^{\prime} +xy = 0;
+\end{equation*}\\
+\begin{equation*}
+    y(1/2) = y^{\prime}(1/2) = -1, y^{\prime\prime} (1/2) = 1
+\end{equation*}\\
+
+\textsl{In Problems 4-7, determine whether the given functions are linearly dependent or linearly independent on the specified interval. Justify your decisions.}
+
+\item \begin{equation*}
+    \{e^{3x}, e^{5x}, e^{-x}\} \end{equation*} on \begin{equation*} (-\infty, \infty) \end{equation*}
+\item \begin{equation*}
+   \{sin^2x, cos^2x, 1\} \end{equation*} on \begin{equation*} (-\infty, \infty) \end{equation*}
+\item \begin{equation*}
+    \{x^{-1}, x^{1/2}, x\} \end{equation*}  on \begin{equation*} (0, \infty) \end{equation*}
+\item \begin{equation*}
+    \{x, x^2, x^3, x^4\} \end{equation*} on \begin{equation*} (-\infty, \infty) \end{equation*}
+\end{enumerate}
+
+\section{Series solutions of differential equations}
+
+Probably the best tool for numerically approximating a function \textsl{f(x)} near a particular point \begin{math} x_0 \end{math} is the \textsl{Taylor polynomial.} The formula for the Taylor polynomial of degree \textsl{n} centered at \begin{math} x_0 \end{math}, approximating a function \textsl{f(x)} possessing \textsl{n} derivatives at \begin{math} x_0 \end{math}, is given by\\
+
+\begin{equation*}
+    p_n(x)=f(x_0) + f^{\prime}(x_0)(x-x_0)+\frac{f^{\prime\prime}(x_0)}{2!}(x-x_0)^2+\frac{f^{\prime\prime\prime}(x_0)}{3!}(x-x_0)^3\\ \\ \indent\setlength{\parindent}{9em} + ... + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n   = \sum\limits_{j=1}^n\frac{f^{(j)}(x_0)}{j!}(x-x_0)^j.
+\end{equation*}\\
+
+This polynomial matches the value of f and the values of its derivatives, up to the order of the polynomial, at the point \textsl{x_0:}\\
+\begin{itemize}
+\item \begin{math}
+p_n(x_0) = f(x_0) \end{math}\\
+
+\item \begin{math} {p_n}^{\prime}(x_0) = f^{\prime}(x_0) \end{math}\\
+
+\item \begin{math} {p_n}^{\prime\prime}(x_0) = f^{\prime\prime}(x_0) \end{math}\\
+\item \begin{math} {p_n}^{(n)}=f^{(n)}(x_0) \end{math} \\
+\end{itemize}
+
+For example, the first four Taylor polynomials for \begin{math} e^x \end{math}, expanded around \begin{math} x_0 =0 \end{math}, are
+
+\begin{itemize}
+\item  \begin{math}
+p_0(x) = 1
+\end{math}
+
+\item \begin{math}
+p_1(x) = 1 + x
+\end{math}
+
+\item  \begin{math}
+p_2(x) = 1 + x + \frac{x^2}{2}
+\end{math}
+
+\item  \begin{math}
+p_3(x) = 1 + x + \frac{x^2}{2} + \frac{x^3}{6}
+\end{math}
+\end{itemize}
+
+
+Their efficacy in approximating the exponential function is demonstrated in \textbf{Figure 8.1.}
+\\
+
+The Taylor polynomial of degree \textsl{n} differs from the polynomial of the next lower degree only in the addition of a single term:\\
+
+\begin{equation}
+    p_n(x) = p_{n-1}(x) + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+\end{equation}\\
+
+\begin{center}
+    
+\includegraphics[width=.5\linewidth]{images/taylor.png}
+\end{center}
+\begin{center}
+\textbf{Figure 8.1} Graphs of Taylor polynomials for \begin{math} e^x \end{math}
+\end{center}\\
+
+so a listing is clearly redundant—one can read off \begin{math} p_0(x),p_1(x), \end{math} and \begin{math} p_2(x) \end{math} from the formula for \begin{math} p_3(x) \end{math}. In fact, if f is infinitely differentiable, \begin{math} p_n(x) \end{math} is just the \begin{math} (n + 1) \end{math}st partial sum of the \textbf{Taylor series} \footnote{Truncated Taylor series were introduced as a tool for constructing recursive formulas for approximate solutions of differential equations.}\\
+
+\begin{equation}
+    \sum\limits_{j=0}^{\infty} \frac{f^{(j)}(x_0)}{j!}(x-x_0)^j
+\end{equation}\\
+
+
+\section{Curves defined by parametric equations}
+
+Imagine that a particle moves along the curve C shown in Figure 1. It is impossible to describe C by an equation of the form \begin{math} y = f(x)\end{math} because C fails the Vertical Line Test. But the \textsl{x}- and \textsl{y-}coordinates of the particle are functions of time and so we can write \begin{math}
+x = f(t)\end{math} and \begin{math} y = g(t) \end{math}. Such a pair of equations is often a convenient way of describing a curve and gives rise to the following definition.\\
+\indent\setlength{\parindent}{1em} Suppose that x and y are both given as functions of a third variable \textsl{t} (called a \textbf{parameter}) by the equations
+\begin{center}
+\begin{equation*}
+    x = f(t) and y = g(t)
+\end{equation*}
+\end{center}
+(called \textbf{parametric equations}). Each value of t determines a point \begin{math} (x, y)\end{math},  which we can plot in a coordinate plane. As \textsl{t} varies, the point \begin{math} (x, y) = (f(t)), g(t)) \end{math} varies and traces out a curve C, which we call a parametric curve. The parameter \textsl{t} does not necessarily represent time and, in fact, we could use a letter other than \textsl{t} for the parameter. But in many applications of parametric curves, t does denote time and therefore we can interpret \begin{math} (x, y) = (f(t)), g(t)) \end{math} as the position of a particle at time \textsl{t}.\\
+\begin{center}
+    
+\includegraphics[width=.5\linewidth]{images/figure 1.png}
+\end{center}\\
+
+\begin{center}
+\textbf{Figure 1}
+\end{center}\\
+
+\textbf{Example:} Sketch and identify the curve defined by the parametric equations
+
+\begin{center}
+    \begin{equation*}
+        x = t^2 -2t, y = t + 1
+    \end{equation*}
+\end{center}
+
+\textbf{Solution:} Each value of \textsl{t} gives a point on the curve, as shown in the table. For instance, if \begin{math} t = 0 \end{math}, then \begin{math} x = 0, y =1 \end{math} and so the corresponding point is \begin{math} (0, 1) \end{math}. In Figure 2 we plot the points \begin{math} (x, y) \end{math} determined by several values of the parameter and we join them to produce a curve.
+
+
+\begin{center}
+\includegraphics[width=0.3\linewidth]{images/figure 2.1.png}\quad\includegraphics[width=0.4\linewidth]{images/figure 2.2.png}
+\end{center}
+
+\begin{center}
+\textbf{Figure 2}
+\end{center}\\
+
+
+A particle whose position is given by the parametric equations moves along the curve in the direction of the arrows as t increases. Notice that the consecutive points marked on the curve appear at equal time intervals but not at equal distances. That is because the particle slows down and then speeds up as \textsl{t} increases.\\
+\indent\setlength{\parindent}{1em} It appears from Figure 2 that the curve traced out by the particle may be a parabola. This can be confirmed by eliminating the parameter \textsl{t} as follows. We obtain \begin{math} t = y - 1 \end{math} from the second equation and substitute into the first equation. This gives
+\begin{equation}
+    x = t^2 - 2t = (y - 1)^2 - 2(y - 1) = y^2 -4y + 3
+\end{equation}
+
+and so the curve represented by the given parametric equations is the parabola
+\begin{equation*} x = y^ 2 - 4y + 3.\end{equation*}
+\indent\setlength{\parindent}{1em} No restriction was placed on the parameter t in Example 1, so we assumed that t could be any real number. But sometimes we restrict t to lie in a finite interval. For instance, the parametric curve\\
+\begin{center}
+\begin{math}
+    x = t^2 - 2t \\ 
+    y = t + 1\\
+    0 \leq t \leq 4
+\end{math}
+\end{center}
+
+shown in Figure 3 is the part of the parabola in Example 1 that starts at the point (0, 1) and 0x ends at the point (8, 5). The arrowhead indicates the direction in which the curve is traced
+as \textsl{t} increases from 0 to 4.
+\indent\setlength{\parindent}{1em} In general, the curve with parametric equations
+\begin{center}
+\begin{math}
+    x = f(t) \\ 
+    y = g(t)\\
+    a \leq t \leq b
+\end{math}
+\end{center}
+
+has \textbf{initial point} (f(a), g(a)) and \textbf{terminal point} (f(b), g(b)).
+
+\begin{center}
+\includegraphics[width=.5\linewidth]{images/figure 3.png}
+\end{center}\\
+\begin{center}
+\textbf{Figure 3}
+\end{center}\\
+
+\section{Answers and solutions}
+\textbf{Basic theory of linear differential equations}\\
+\\
+\begin{enumerate*}
+  \item  (3/2, 5/2)   
+  \item  (0, 1)   
+  \item  Linearly dependent   
+  \item  Linearly dependent   
+  \item  Linearly independent   
+  \item Linearly independent   
+\end{enumerate*}
+
+
+\section{Useful materials}
+
+
+\begin{center}
+Integral table\\ \\
+\end{center} 
+\begin{center}
+\scalebox{1.4}{
+\begin{tabular}{ | c | c |}
+\hline
+  \begin{equation*}
+    \small{ \int dx = x + c}
+  \end{equation*} & \begin{equation*}
+      \small{\int sin xdx = -cosx + c}
+  \end{equation*}  \\ \hline
+  \begin{equation*}
+      \small{\int x^\alpha dx = \frac{x^{\alpha + 1} {\alpha + 1}} + c, \alpha \neq 1}
+  \end{equation*} & \small{\begin{equation*} \int \small{\frac{dx}{cosx^2} = tgx + c}
+  \end{equation*}}  \\ \hline
+  \begin{equation*}
+      \small{\int \alpha^xdx = \frac{\alpha^x}{lna} + c}
+  \end{equation*} & \begin{equation*}
+      \small{\int \frac{dx}{sinx^2} = -ctgx + c}
+  \end{equation*}\\ \hline
+  \begin{equation*}
+      \int \small{\frac{dx}{x} = ln|x| = c}
+  \end{equation*} & \begin{equation*}
+      \small{\int \frac{dx}{sinx} = ln|tg\frac{x}{2}| + c}
+  \end{equation*} \\ \hline
+  \begin{equation*}
+    \small{\int cos xdx = sinx + c}
+  \end{equation*}  & \begin{equation*}
+     \small{\int \frac{dx}{cosx} = ln|tg(\frac{x}{2}) + \frac{\pi}{2}| + c}
+  \end{equation*} \\
+\hline
+\end{tabular}
+}
+\end{center}\\ 
+\\
+
+\begin{center}
+    Operation with matrices
+\end{center}
+\textsl{The following rules are satisfied by the operations of matrix addition, scalar multiplication and matrix multiplication.}
+
+\begin{enumerate}
+	\item matrix multiplication is distributive with respect to matrix addition, that is,
+	\begin{enumerate}
+		\item 
+		    A(B + C) = AB + AC    for any  A $\in$ Mat(m, n, F),\\ and B, C $\in$ Mat(n, p, F) (left distributivity)
+		\item (B + C)A = BA + CA   for any A $\in$ Mat(n, p, F)\\ and B, C $\in$ Mat(m, n, F) (right distributivity)
+	\end{enumerate}
+	\item matrix multiplication is associative, that is,
+	\begin{enumerate}
+	\item (AB)C = A(BC) for any A $\in$ Mat(m, n, F), B $\in$ Mat( n, p, F) and C $\in$ Mat(p, q, F)
+	\end{enumerate}
+	\item matrix multiplication is compatible with scalars, that is,
+		\begin{enumerate}
+		\item \begin{math}(\lambda _1 A)(\lambda_2 B) = (\lambda _1 \lambda _2)(AB) \end{math} for any A $\in$ Mat(m, n, F), B $\in$ Mat(n, p, F) and \begin{math} \lambda _ 1, \lambda _2 $\in$ F; \end{math}
+	\end{enumerate}
+	\item \begin{math} I_n \end{math} is the multiplicative identity of \begin{math} M_n(F) \end{math}, that is,
+	\begin{enumerate}
+	\item \begin{math} I_nA = AI_n\end{math} for any A$\in$ \begin{math} Mat_n(F) \end{math}
+		\end{enumerate}
+		\end{enumerate}
+
+
+\begin{center}
+    Trigonometric formulas
+\end{center}\\
+\begin{center}
+\scalebox{1.2}{
+\begin{tabular}{|c|}
+\hline
+    \begin{equation*}
+        \small{sin(\alpha + \beta) = sin\alpha cos\beta + cos\alpha sin\beta}
+    \end{equation*}\\ \hline
+    \begin{equation*}
+        \small{sin(\alpha - \beta) = sin\alpha cos\beta - cos\alpha sin\beta}
+    \end{equation*}\\ \hline
+    \begin{equation*}
+       \small{ cos(\alpha + \beta) = cos\alpha cos\beta - sin\alpha sin\beta}
+    \end{equation*}\\ \hline
+    \begin{equation*}
+        \small{cos(\alpha - \beta) = cos\alpha cos\beta + sin\alpha sin\beta}
+    \end{equation*}\\ \hline
+    \begin{equation*}
+        \small{tg(\alpha+\beta) = \frac{tg\alpha+tg\beta}{1 - tg\alpha tg\beta}}
+    \end{equation*}\\ \hline
+    \begin{equation*}
+        \small{tg(\alpha-\beta) = \frac{tg\alpha+tg\beta}{1 + tg\alpha tg\beta}}
+    \end{equation*}\\ \hline
+    \begin{equation*}
+        \small{ctg(\alpha +\beta) = \frac{ctg\alpha ctg\beta - 1}{ctg\alpha + ctg\beta}}
+    \end{equation*}\\ \hline
+    \begin{equation*}
+        \small{ ctg(\alpha - \beta) = \frac{ctg\alpha ctg\beta + 1}{ctg\alpha + ctg\beta}}
+    \end{equation*}\\ \hline
+    \end{tabular}}
+\end{center}
+
+\newpage
+\begin{thebibliography}{10}
+
+\bibitem{saff} Nagle Saff Snide ”Fundamentals of Differential Equations \\
+\bibitem{demidova} N.E. Demidova "Fundamentals of trigonometry"\\
+\bibitem{anthony} Anthony and Biggs "Mathematics for Economics and Finance"\\
+\bibitem{demidovich} B.P. Demidovich " Problems and exercises in calculus"\\
+\bibitem{stewart} James Stewart McMaster University "Calculus"\\
+\bibitem{simon}  Simon and Blume "Mathematics for Economists"\\
+\bibitem{adams} Adams and Essex "Calculus - A Complete Course"\\
+\bibitem{binmore} Binmore and Davies "Calculus: Concepts and Methods"\\
+\bibitem{filippov} A.F. Fillipov. "Collection of problems on differential equations"\\
+\bibitem{romanko} V.K. Romanko, "Course on Differential Equations and Calculus of Variations"
+\end{thebibliography}
+
+\end{document}

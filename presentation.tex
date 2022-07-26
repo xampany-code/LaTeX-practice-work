@@ -1,0 +1,72 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[usenames]{color}
+\usepackage{colortbl}
+\usetheme{Dresden}
+\usecolortheme{default}
+
+\title{LaTeX  practice work}
+\subtitle{Beamer presentation}
+\author{Anna Gertsog}
+\institute[HSE]{Faculty of Computer Science,\\ Data Science and Business Analytics, \\ HSE University}
+\date{25 July 2022}
+
+\logo{\includegraphics[height=1.5cm]{images/logo.png}}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+\end{frame}
+
+\section{Intro}
+\begin{frame}
+\frametitle{Introduction to LaTeX}
+\textbf{What is LaTeX?}\\
+LaTeX is the collective name for a document preparation system. It includes a set of tools that generate print-ready documents (usually in PDF format) from text files written using a special markup language. TeX itself is the low-level markup and programming language which underpins it.
+\end{frame}
+
+\begin{frame}
+\frametitle{Why and what is LaTeX used for?}
+Typically, LaTeX is used to write articles, documents, reports and develop presentations.\\
+This markup language has a number of advantages:
+\begin{itemize}
+    \item Easy to type mathematical formulas, design graphs, algorithms and other formulas
+    \item Style, fonts, table layout and drawings are consistent throughout the whole document
+    \item It is free and easy to use
+    \item Since the source document simply contains text, you can use software tools to create tables, figures, formulas, etc
+\end{itemize}
+\end{frame}
+
+\section{My experience}
+
+\begin{frame}
+\frametitle{My experience of using LaTeX}
+
+Initially, I had only heard about LaTeX from friends, who told me how useful it was for writing formulas for mathematical assignments.  However, I considered the markup language itself to be complicated, because you have to learn a number of commands to use it.\\
+Eventually I realised that I wanted to learn LaTeX and I would need it in my 3rd year at \textbf{DSBA}, so I chose this course in my summer internship. To be honest, I learned it in just a couple of hours, designed my coursework report nicely, and started actively using formulas. Now I can confidently say that I  I master this markup language well and I will definitely actively use it in the future and recommend it to my friends.
+\end{frame}
+
+\section{LaTeX features}
+\begin{frame}{LaTeX features}
+    As already mentioned, LaTeX is as easy as possible to create formulas, which is a distinct advantage over Word, for example:\\
+    \begin{equation*}
+\textcolor{cyan}{\sqrt[n]{1+x+x^2+x^3+\dots+x^n}}
+     \end{equation*}\\
+     \begin{center}
+     It's also convenient for inserting pictures:\\
+       \end{center}
+         \begin{center}
+     \includegraphics[width=0.4\linewidth]{images/Gregory_and_watermelon.jpeg}\quad\includegraphics[width=.35\linewidth]{images/gosha.jpeg}
+          \end{center}
+\end{frame}
+\section{Conclusion}
+\begin{frame}{Conclusion}
+\begin{center}
+   Thank you for the course and for your attention!
+    \end{center}
+\end{frame}
+\end{document}
